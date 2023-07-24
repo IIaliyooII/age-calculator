@@ -40,37 +40,39 @@ const Form = ({ setDeta }) => {
   };
 
   return (
-    <form onSubmit={dateFormHandler} className='flex gap-4'>
-      <Input
-        value={day}
-        onChangeHandler={setDay}
-        onKeyHandler={inputMaxLengthHandler}
-        onMaxLength={2}
-        name='day'
-        onPlaceholder='DD'
-        isValid={isValid}
-        message={day > 31 ? "Must be valid day" : ""}
-      />
-      <Input
-        value={month}
-        onChangeHandler={setMonth}
-        onKeyHandler={inputMaxLengthHandler}
-        onMaxLength={2}
-        name='month'
-        onPlaceholder='MM'
-        isValid={isValid}
-        message={month > 12 ? "Must be valid month" : ""}
-      />
-      <Input
-        value={year}
-        onChangeHandler={setYear}
-        onKeyHandler={inputMaxLengthHandler}
-        onMaxLength={4}
-        name='year'
-        onPlaceholder='YYYY'
-        isValid={isValid}
-        message={year > currentYear ? "Must be in the past" : ""}
-      />
+    <form onSubmit={dateFormHandler} className='flex flex-col md:flex-row gap-4'>
+      <div className='flex gap-4'>
+        <Input
+          value={day}
+          onChangeHandler={setDay}
+          onKeyHandler={inputMaxLengthHandler}
+          onMaxLength={2}
+          name='day'
+          onPlaceholder='DD'
+          isValid={isValid}
+          message={day > 31 ? "Must be valid day" : ""}
+        />
+        <Input
+          value={month}
+          onChangeHandler={setMonth}
+          onKeyHandler={inputMaxLengthHandler}
+          onMaxLength={2}
+          name='month'
+          onPlaceholder='MM'
+          isValid={isValid}
+          message={month > 12 ? "Must be valid month" : ""}
+        />
+        <Input
+          value={year}
+          onChangeHandler={setYear}
+          onKeyHandler={inputMaxLengthHandler}
+          onMaxLength={4}
+          name='year'
+          onPlaceholder='YYYY'
+          isValid={isValid}
+          message={year > currentYear ? "Must be in the past" : ""}
+        />
+      </div>
 
       <button className='w-20 h-20 flex items-center justify-center mt-20 ml-12 rounded-full bg-main-purple hover:bg-black duration-150'>
         <Arrow />
