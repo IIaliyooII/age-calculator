@@ -1,24 +1,34 @@
 import { useState } from "react";
-import { ReactComponent as Arrow } from "../assets/arrow.svg";
-import Input from "./Input";
+import { ReactComponent as Arrow } from "./assets/arrow.svg";
+import Input from "./components/Input";
 
-const Form = () => {
-  const [day, setDay] = useState();
-  const [month, setMonth] = useState();
-  const [year, setYear] = useState();
+// eslint-disable-next-line react/prop-types
+const Form = ({ setDeta }) => {
+  const [day, setDay] = useState(0);
+  const [month, setMonth] = useState(0);
+  const [year, setYear] = useState(0);
+  const [isValid, setIsValid] = useState(true);
+
+  const currentDay = new Date().getDate();
+  const currentMonth = new Date().getMonth() + 1;
+  const currentYear = new Date().getFullYear();
 
   const dateFormHandler = (event) => {
     event.preventDefault();
-    const currentDay = new Date().getDate();
-    const currentMonth = new Date().getMonth() + 1;
-    const currentYear = new Date().getFullYear();
 
-    if (day > 0 && day <= 31 && month > 0 && month <= 12) {
+    if (day === 0 || month === 0 || year === 0) {
+      setIsValid(false);
+      return;
+    }
+
+    if (day < 31 && day > 0 && month < 12 && month > 0 && year < currentYear && year > 0) {
       const date = {
         day: currentDay - day,
         month: currentMonth - month,
         year: currentYear - year,
       };
+      setDeta(date);
+      setIsValid(true);
     }
   };
   const inputMaxLengthHandler = (e) => {
@@ -28,6 +38,7 @@ const Form = () => {
       return;
     }
   };
+
   return (
     <form onSubmit={dateFormHandler} className='flex gap-4'>
       <Input
@@ -37,8 +48,8 @@ const Form = () => {
         onMaxLength={2}
         name='day'
         onPlaceholder='DD'
-        onMin={1}
-        onMax={31}
+        isValid={isValid}
+        message={day > 31 ? "Must be valid day" : ""}
       />
       <Input
         value={month}
@@ -47,8 +58,8 @@ const Form = () => {
         onMaxLength={2}
         name='month'
         onPlaceholder='MM'
-        onMin={1}
-        onMax={12}
+        isValid={isValid}
+        message={month > 12 ? "Must be valid month" : ""}
       />
       <Input
         value={year}
@@ -57,6 +68,8 @@ const Form = () => {
         onMaxLength={4}
         name='year'
         onPlaceholder='YYYY'
+        isValid={isValid}
+        message={year > currentYear ? "Must be in the past" : ""}
       />
 
       <button className='w-20 h-20 flex items-center justify-center mt-20 ml-12 rounded-full bg-main-purple hover:bg-black duration-150'>

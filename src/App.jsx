@@ -1,22 +1,17 @@
-import Form from "./components/Form";
+import { useState } from "react";
+import Form from "./Form";
+import Age from "./components/Age";
 
 function App() {
+  const [deta, setDeta] = useState([]);
+
   return (
     <main className='w-full h-screen flex flex-col items-center justify-evenly  '>
-      <Form />
+      <Form setDeta={setDeta} />
       <div className='flex flex-col gap-1 font-extrabold text-8xl italic mb-28'>
-        <div className='flex flex-row gap-1'>
-          <span className='text-main-purple'>10</span>
-          <p>Years</p>
-        </div>
-        <div className='flex flex-row gap-1'>
-          <span className='text-main-purple'>4</span>
-          <p>Months</p>
-        </div>
-        <div className='flex flex-row gap-1'>
-          <span className='text-main-purple'>38</span>
-          <p>Days</p>
-        </div>
+        <Age num={!deta.year ? "--" : deta.year} label='Years' />
+        <Age num={!deta.month ? "--" : deta.month} label='Months' />
+        <Age num={!deta.day ? "--" : deta.day} label='Days' />
       </div>
     </main>
   );
