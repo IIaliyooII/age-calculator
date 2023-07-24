@@ -2,9 +2,9 @@ import Form from "./components/Form";
 
 function App() {
   return (
-    <main className='w-full h-screen flex flex-col items-center justify-evenly italic '>
+    <main className='w-full h-screen flex flex-col items-center justify-evenly  '>
       <Form />
-      <div className='flex flex-col gap-1 font-extrabold text-8xl'>
+      <div className='flex flex-col gap-1 font-extrabold text-8xl italic mb-28'>
         <div className='flex flex-row gap-1'>
           <span className='text-main-purple'>10</span>
           <p>Years</p>
