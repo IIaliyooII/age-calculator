@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ReactComponent as Arrow } from "./assets/arrow.svg";
 import Input from "./components/Input";
 
@@ -8,6 +8,7 @@ const Form = ({ setDeta }) => {
   const [month, setMonth] = useState(0);
   const [year, setYear] = useState(0);
   const [isValid, setIsValid] = useState(true);
+  const inputRef = useRef();
 
   const currentDay = new Date().getDate();
   const currentMonth = new Date().getMonth() + 1;
@@ -15,6 +16,7 @@ const Form = ({ setDeta }) => {
 
   const dateFormHandler = (event) => {
     event.preventDefault();
+    inputRef.current.focus();
 
     if (day === 0 || month === 0 || year === 0) {
       setIsValid(false);
@@ -29,16 +31,22 @@ const Form = ({ setDeta }) => {
       };
       setDeta(date);
       setIsValid(true);
+      setDay(0);
+      setMonth(0);
+      setYear(0);
     }
   };
   const inputMaxLengthHandler = (e) => {
     const { value, maxLength } = e.target;
     if (String(value).length >= maxLength) {
       e.preventDefault();
+
       return;
     }
   };
-
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   return (
     <form onSubmit={dateFormHandler} className='flex flex-col md:flex-row gap-4'>
       <div className='flex gap-4'>
@@ -47,6 +55,7 @@ const Form = ({ setDeta }) => {
           onChangeHandler={setDay}
           onKeyHandler={inputMaxLengthHandler}
           onMaxLength={2}
+          inputRef={inputRef}
           name='day'
           onPlaceholder='DD'
           isValid={isValid}

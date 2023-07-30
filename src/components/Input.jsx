@@ -1,5 +1,15 @@
 /* eslint-disable react/prop-types */
-const Input = ({ value, onChangeHandler, onKeyHandler, name, onPlaceholder, onMaxLength, isValid, message }) => {
+const Input = ({
+  value,
+  onChangeHandler,
+  onKeyHandler,
+  name,
+  onPlaceholder,
+  onMaxLength,
+  isValid,
+  message,
+  inputRef,
+}) => {
   return (
     <div className='flex flex-col  gap-1 font-poppins text-black font-bold text-base lg:text-[2rem] duration-150'>
       <label
@@ -12,10 +22,11 @@ const Input = ({ value, onChangeHandler, onKeyHandler, name, onPlaceholder, onMa
         onChange={(el) => onChangeHandler(el.target.value)}
         onKeyPress={onKeyHandler}
         maxLength={onMaxLength}
+        ref={inputRef}
         id={name}
         name={name}
         type='number'
-        className={`w-24 lg:w-32 border rounded-md outline-none px-4 py-1 placeholder:text-smokey-grey/75 active:border-main-purple hover:border-main-purple duration-150' uppercase ${
+        className={`w-24 lg:w-32 border rounded-md outline-none px-4 py-1 placeholder:text-smokey-grey/75 active:border-main-purple hover:border-main-purple duration-150' uppercase drop-shadow-md ${
           isValid ? "border-light-grey" : "border-light-red"
         }`}
         placeholder={onPlaceholder}

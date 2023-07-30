@@ -2,7 +2,7 @@
 const Age = ({ num, label }) => {
   return (
     <div className='flex flex-row gap-6 items-center justify-center font-extrabold italic text-4xl lg:text-8xl '>
-      <span className='text-main-purple text-5xl lg:text-9xl'>{num}</span>
+      <span className='text-main-purple text-5xl lg:text-9xl'>{Math.abs(num) || "--"}</span>
       <p>{label}</p>
     </div>
   );
